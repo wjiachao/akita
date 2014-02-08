@@ -1,0 +1,45 @@
+doctype html
+html
+  = render :partial => 'layouts/head'
+  body
+
+    div.row.topbar
+
+    div.row
+      div.ten.columns.push-two
+        - flash.each do |name, msg| 
+          - if msg.is_a?(String) 
+            = content_tag :div, :class => "alert-box #{name}" do
+              = msg.html_safe
+        = yield
+
+      div.two.columns.pull-ten
+        - if user_signed_in?
+          div.left
+            = gravatar_image_url current_user.email, '20x20'
+          div.left.pd1p.gray
+            = link_to short_text(current_user.nickname || current_user.email, 8), '#'
+          div.clear
+          ul.side-nav
+            li.divider
+            li class="#{controller_name == 'home' ? 'active' : ''}"
+              = link_to "home", root_path
+            li class="#{controller_name == 'tags' ? 'active' : ''}"
+              = link_to "tags", tags_path
+            li class="#{['lists', 'links', 'favorites'].include?(controller_name) ? 'active' : ''}"
+              = link_to "my", links_path
+            li.link_new
+              = link_to "new", 'javascript:void(0);' 
+            li.divider
+            li
+              = link_to "logout", logout_path, method: :delete
+          - if (num_of_invites = current_user.invites.available.count) > 0
+            div
+              a.invite href='javascript:void(0);'
+                span.label.radius.success #{num_of_invites} codes left
+
+    = render :partial => 'pages/shortcuts'
+    = render :partial => 'pages/invite'
+    = render :partial => 'pages/new'
+    = render :partial => 'layouts/foot'
+  

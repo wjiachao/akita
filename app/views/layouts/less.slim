@@ -1,0 +1,8 @@
+doctype html
+html
+  = render :partial => 'layouts/head' 
+  body
+    div.mt1
+      = yield
+
+    = javascript_include_tag "application"

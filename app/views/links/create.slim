@@ -1,0 +1,15 @@
+div.centerModal
+	div.row
+		div.ten.columns
+			div.panel
+				h5 保存成功！ 
+				br
+				p 窗口1秒后自动关闭..
+
+javascript:
+	window.onload = function(){
+		window.setTimeout(function(){
+			window.close();
+		}, 1000);
+	}
+	

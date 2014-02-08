@@ -1,0 +1,20 @@
+div.centerModal
+
+	div.row
+		div.six.columns.centered
+			div.panel.radius
+				div.text-center
+					h4 VIP Access Only
+					br
+				= form_for Apply.new, :url => {:action => :apply} do |f|
+					div.row
+						div.two.columns
+							= f.label :email, "Email", class: "right inline"
+						div.eight.columns
+							= f.text_field :email, class: 'email', placeholder: "", value: current_user && current_user.email
+						div.two.columns
+							= f.submit 'Join', class: 'radius button success inline'
+					div.row
+						p.text-center
+							= link_to 'Existing user?', login_path, class: 'underline bold '
+						

@@ -1,0 +1,39 @@
+div.centerModal
+	div.row
+		= form_for resource, :as => resource_name, :url => session_path(resource_name) do |f|
+			div.six.columns.centered
+				div.panel.radius
+					dl.tabs.pill.text-center
+						dd.active
+							= link_to 'Login', '#'
+						dd
+							= link_to 'Register', signup_path
+					div.row
+						div.three.columns
+							= f.label :email, 'Email', class: 'right inline'
+						div.nine.columns
+							= f.text_field :email, class: 'email'
+						
+					div.row
+						div.three.columns
+							= f.label :password, 'Password', class: 'right inline'
+						div.nine.columns
+							= f.password_field :password, class: 'password'
+
+					div.row
+						div.three.columns 
+						div.five.columns 
+							div.left
+								= f.check_box :remember_me, class: 'left inline'
+								= f.label :remember_me, "Remember Me!", class: 'left'
+							div.clear
+							
+						div.four.columns
+							= f.submit 'Login', class: 'radius button right inline'
+					div.row
+						div.three.columns
+							= link_to "Forget pwd?", new_user_password_path
+						div.nine.columns
+							= link_to 'Sign in with Google account', user_omniauth_authorize_path(:google_oauth2), class: 'underline'
+
+							
